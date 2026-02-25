@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MODUL AJAR SMK NEGERI 14 SAMARINDA - Asgar, S.Pd</title>
+    <!-- Font Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            /* Warna Identitas SMKN 14 Samarinda */
+            --primary: #1e3a8a; /* Biru Tua */
+            --primary-light: #3b82f6; 
+            --accent: #fbbf24; /* Kuning Emas */
+            --bg-app: #f1f5f9;
+            --surface: #ffffff;
+            --text-main: #0f172a;
+            --border: #e2e8f0;
+            
+            --radius-lg: 12px;
+            --radius-md: 8px;
+            --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.1);
+        }
+
+        * {
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--bg-app);
+            color: var(--text-main);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* --- Header Aplikasi --- */
+        .app-header {
+            background: linear-gradient(90deg, var(--primary) 0%, #172554 100%);
+            color: white;
+            padding: 0.8rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            border-bottom: 4px solid var(--accent);
+        }
+
+        .brand-container {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .logo-school {
+            height: 55px;
+            width: auto;
+            background: white;
+            border-radius: 50%;
+            padding: 3px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.3);
+        }
+
+        .brand-text h1 {
+            font-size: 1.1rem;
+            font-weight: 700;
+            line-height: 1.2;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .brand-text p {
+            font-size: 0.85rem;
+            color: #bfdbfe;
+            font-weight: 500;
+        }
+
+        .app-logo {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(255,255,255,0.15);
+            padding: 6px 12px;
+            border-radius: 8px;
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+        .app-logo-icon { font-size: 1.2rem; }
+        .app-logo-text { font-size: 0.9rem; font-weight: 600; }
+
+        /* --- Layout --- */
+        .main-container {
+            flex: 1;
+            display: grid;
+            grid-template-columns: 360px 1fr;
+            gap: 2rem;
+            max-width: 1400px;
+            margin: 2rem auto;
+            padding: 0 2rem;
+            width: 100%;
+        }
+
+        .sidebar {
+            background: var(--surface);
+            padding: 1.5rem;
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-md);
+            height: fit-content;
+            border: 1px solid var(--border);
+        }
+
+        .section-title {
+            font-size: 0.85rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 1.25rem;
+            color: var(--primary);
+            border-bottom: 2px solid var(--bg-app);
+            padding-bottom: 8px;
+            display: flex; align-items: center; gap: 8px;
+        }
+
+        .form-group { margin-bottom: 1.25rem; }
+        label { display: block; font-size: 0.85rem; font-weight: 600; margin-bottom: 0.5rem; color: #334155; }
+        
+        input, select, textarea {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid var(--border);
+            border-radius: var(--radius-md);
+            font-size: 0.9rem;
+            background: #f8fafc;
+        }
+
+        input:focus, select:focus, textarea:focus { outline: none; border-color: var(--primary); background: #fff; }
+
+        .btn {
+            width: 100%;
+            padding: 0.85rem;
+            border: none;
+            border-radius: var(--radius-md);
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            transition: 0.2s;
+        }
+
+        .btn-primary { background: var(--primary); color: white; }
+        .btn-primary:hover { background: #172554; }
+        
+        .btn-outline { background: transparent; border: 1px solid var(--border); color: var(--text-main); margin-top: 10px; }
+        .btn-outline:hover { background: #f1f5f9; }
+
+        /* --- Preview Area --- */
+        .preview-area { display: flex; flex-direction: column; gap: 1rem; }
+        .toolbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: var(--surface);
+            padding: 0.75rem 1.5rem;
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-md);
+        }
+        .paper-wrapper {
+            background: #525659;
+            padding: 2rem;
+            border-radius: var(--radius-lg);
+            min-height: 600px;
+            display: flex;
+            justify-content: center;
+            overflow-y: auto;
+        }
+
+        #modul-document {
+            background: white;
+            width: 100%;
+            max-width: 210mm;
+            min-height: 297mm;
+            padding: 20mm;
+            box-shadow: 0 0 20px rgba(0,0,0,0.3);
+            font-size: 10.5pt;
+            color: #000;
+            line-height: 1.4;
+            position: relative;
+        }
+
+        /* --- Dokumen Styling --- */
+        .doc-kop {
+            display: flex;
+            align-items: center; /* Vertikal center agar seimbang */
+            justify-content: center;
+            border-bottom: 3px solid #000;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        
+        /* Revisi Ukuran Logo agar Proporsional */
+        .kop-logo { 
+            height: 85px; /* Ukuran disesuaikan agar tidak terlalu besar */
+            width: auto; 
+            margin-right: 25px; /* Jarak logo ke teks */
+            object-fit: contain;
+        }
+
+        .kop-text h3 { font-size: 11pt; margin: 0; font-weight: 600; text-transform: uppercase; }
+        .kop-text h2 { font-size: 13pt; margin: 2px 0; font-weight: 700; text-transform: uppercase; }
+        .kop-text h1 { font-size: 16pt; margin: 4px 0; font-weight: 900; text-transform: uppercase; color: var(--primary); }
+        .kop-text p { font-size: 9pt; margin: 0; font-style: normal; font-weight: 500; }
+
+        .doc-center-title {
+            text-align: center;
+            margin-bottom: 25px;
+            border-bottom: 1px solid #000;
+            padding-bottom: 10px;
+        }
+        .doc-center-title h2 { font-size: 14pt; font-weight: 700; text-transform: uppercase; margin: 0; }
+        .doc-center-title p { font-size: 11pt; margin-top: 5px; font-weight: 600; }
+
+        .doc-section { margin-bottom: 20px; page-break-inside: avoid; }
+        .doc-section h3 {
+            font-size: 11pt; font-weight: 700; margin-bottom: 8px; 
+            background: #f1f5f9; padding: 4px 8px; border-left: 4px solid var(--primary);
+            text-transform: uppercase;
+        }
+        
+        .doc-table { width: 100%; border-collapse: collapse; margin-bottom: 15px; font-size: 10pt; }
+        .doc-table td { border: 1px solid #000; padding: 6px; vertical-align: top; }
+        .doc-table td:first-child { width: 28%; font-weight: 600; background: #f9fafb; }
+
+        /* Styling Alur Tujuan (AI Flow) */
+        .alur-tujuan-box {
+            border-left: 3px solid var(--accent);
+            background: #fffbeb;
+            padding: 10px 15px;
+            margin-top: 10px;
+        }
+        .step-item {
+            margin-bottom: 8px;
+            display: flex;
+            gap: 10px;
+        }
+        .step-num {
+            background: var(--accent);
+            color: white;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+            font-weight: bold;
+            flex-shrink: 0;
+        }
+
+        .doc-list { padding-left: 20px; margin-top: 5px; }
+        .doc-list li { margin-bottom: 3px; }
+
+        .loader {
+            display: none;
+            width: 40px; height: 40px;
+            border: 4px solid #f3f3f3; border-top: 4px solid var(--primary);
+            border-radius: 50%; animation: spin 1s linear infinite; margin: 50px auto;
+        }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+        .empty-state { text-align: center; color: #94a3b8; padding-top: 100px; }
+
+        /* Tanda Tangan Hanya Guru */
+        .signature-only {
+            margin-top: 60px;
+            text-align: right; /* Rata kanan karena kepala sekolah dihapus */
+            padding-right: 50px;
+        }
+
+        @media (max-width: 900px) {
+            .main-container { grid-template-columns: 1fr; }
+            .paper-wrapper { padding: 1rem; }
+            #modul-document { padding: 10mm; }
+            .app-header { flex-direction: column; gap: 10px; text-align: center; padding: 1rem; }
+            .brand-container { flex-direction: column; }
+        }
+        
+        @media print {
+            body { background: white; }
+            .app-header, .sidebar, .toolbar, .loader, .empty-state { display: none !important; }
+            .main-container { display: block; margin: 0; padding: 0; width: 100%; max-width: none; }
+            .paper-wrapper { background: white; padding: 0; box-shadow: none; display: block; }
+            #modul-document { box-shadow: none; margin: 0; width: 100%; max-width: 100%; padding: 0; }
+            .doc-section h3 { border-left: 4px solid #000; background: #eee; color: #000; -webkit-print-color-adjust: exact; }
+            .alur-tujuan-box { border-left: 3px solid #000; background: #f9f9f9; -webkit-print-color-adjust: exact; }
+            .step-num { background: #000; color: #fff; -webkit-print-color-adjust: exact; }
+        }
+    </style>
+</head>
+<body>
+
+    <header class="app-header">
+        <div class="brand-container">
+            <img src="https://z-cdn-media.chatglm.cn/files/44280b1e-08de-468a-855d-80267d9bc06f.png?auth_key=1871661578-c0c9ed99a0144d058c51e3d6b3b12934-0-9bc3d6c816d6e3215e2a0fc3f98782aa" 
+                 alt="Logo SMKN 14" class="logo-school"
+                 onerror="this.src='https://via.placeholder.com/100?text=SMK14'">
+            <div class="brand-text">
+                <h1>Sistem Pembuat Modul Ajar</h1>
+                <p>SMK NEGERI 14 SAMARINDA</p>
+            </div>
+        </div>
+        <div class="app-logo">
+            <span class="app-logo-icon">📚</span>
+            <span class="app-logo-text">ModulAjar.AI</span>
+        </div>
+    </header>
+
+    <div class="main-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <form id="modulForm" onsubmit="event.preventDefault(); generateModul();">
+                <div class="section-title"><span>⚙️ Parameter Modul</span></div>
+                
+                <!-- Identitas Guru -->
+                <div class="form-group">
+                    <label>Nama Guru</label>
+                    <input type="text" id="namaGuru" value="Asgar, S.Pd" required>
+                </div>
+                <div class="form-group">
+                    <label>NIP Guru</label>
+                    <input type="text" id="nipGuru" value="198906132024211013" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Sekolah</label>
+                    <input type="text" id="sekolah" value="SMK NEGERI 14 SAMARINDA" readonly style="background: #e2e8f0; cursor: not-allowed;">
+                </div>
+                
+                <div class="form-group">
+                    <label>Mata Pelajaran</label>
+                    <select id="mapel" required>
+                        <option value="" disabled selected>Pilih Mapel</option>
+                        <option value="AKL">Akuntansi dan Keuangan Lembaga (AKL)</option>
+                        <option value="Komersial">Komersial</option>
+                        <option value="Matematika">Matematika</option>
+                        <option value="Bahasa Indonesia">Bahasa Indonesia</option>
+                        <option value="PPKn">PPKn</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>Fase / Kelas</label>
+                    <select id="fase" required>
+                        <option value="X AKL">Kelas X AKL</option>
+                        <option value="XI AKL">Kelas XI AKL</option>
+                        <option value="XII AKL">Kelas XII AKL</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>Topik / Materi Pokok</label>
+                    <input type="text" id="materi" placeholder="Cth: Ayat Jurnal Penyesuaian" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Alokasi Waktu (JP)</label>
+                    <input type="number" id="jp" value="2" min="1" max="6" required>
+                </div>
+
+                <!-- Input Manual CP -->
+                <div class="form-group" style="background: #f0f9ff; padding: 10px; border-radius: 8px; border: 1px dashed var(--primary-light);">
+                    <label style="color: var(--primary);">Capaian Pembelajaran (CP)</label>
+                    <textarea id="cpManual" rows="3" placeholder="Tulis CP secara manual di sini sesuai dokumen CP..." required></textarea>
+                    <small style="font-size: 0.7rem; color: #666;">*Wajib diisi manual oleh Guru</small>
+                </div>
+
+                <button type="submit" class="btn btn-primary" id="btnGenerate">
+                    <span>✨ Generate Modul</span>
+                </button>
+            </form>
+        </aside>
+
+        <!-- Preview -->
+        <main class="preview-area">
+            <div class="toolbar">
+                <span style="font-weight: 600; color: var(--text-main);">Live Preview Dokumen</span>
+                <div style="display: flex; gap: 10px;">
+                    <button class="btn btn-outline" style="width: auto; margin:0; padding: 8px 15px;" onclick="window.print()">🖨️ Cetak / PDF</button>
+                </div>
+            </div>
+
+            <div class="paper-wrapper">
+                <div id="modul-document">
+                    <div class="loader" id="loader"></div>
+                    <div class="empty-state" id="emptyState">
+                        <div style="font-size: 3rem; margin-bottom: 1rem;">📄</div>
+                        <h3>Siap Membuat Modul Ajar</h3>
+                        <p>Lengkapi data di sebelah kiri dan klik Generate.</p>
+                    </div>
+                    <div id="documentContent"></div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        const SCHOOL_LOGO_URL = "https://z-cdn-media.chatglm.cn/files/44280b1e-08de-468a-855d-80267d9bc06f.png?auth_key=1871661578-c0c9ed99a0144d058c51e3d6b3b12934-0-9bc3d6c816d6e3215e2a0fc3f98782aa";
+
+        function generateModul() {
+            const guru = document.getElementById('namaGuru').value;
+            const nip = document.getElementById('nipGuru').value;
+            const sekolah = document.getElementById('sekolah').value;
+            const mapel = document.getElementById('mapel').value;
+            const fase = document.getElementById('fase').value;
+            const materi = document.getElementById('materi').value;
+            const jp = document.getElementById('jp').value;
+            const cpManual = document.getElementById('cpManual').value;
+
+            if(!guru || !nip || !cpManual || !materi) {
+                alert('Mohon lengkapi Nama, NIP, CP Manual, dan Materi!');
+                return;
+            }
+
+            const btn = document.getElementById('btnGenerate');
+            const loader = document.getElementById('loader');
+            const empty = document.getElementById('emptyState');
+            const content = document.getElementById('documentContent');
+
+            btn.disabled = true;
+            btn.innerHTML = '⏳ AI sedang menyusun Tujuan...';
+            loader.style.display = 'block';
+            empty.style.display = 'none';
+            content.style.display = 'none';
+
+            // --- AI LOGIC GENERATOR ---
+            
+            // 1. Generate Tujuan Pembelajaran (Umum)
+            const tujuanUtama = `Peserta didik mampu memahami konsep dasar ${materi} serta mampu mengaitkannya dengan situasi nyata di dunia kerja industri.`;
+
+            // 2. Generate Alur Tujuan Pembelajaran (Bloom's Taxonomy Flow)
+            const alurTujuanAI = `
+                <div class="step-item">
+                    <div class="step-num">1</div>
+                    <div><strong>Memahami (C2):</strong> Menjelaskan definisi dan fungsi utama dari ${materi}.</div>
+                </div>
+                <div class="step-item">
+                    <div class="step-num">2</div>
+                    <div><strong>Menganalisis (C4):</strong> Menguraikan komponen-komponen yang terdapat dalam ${materi}.</div>
+                </div>
+                <div class="step-item">
+                    <div class="step-num">3</div>
+                    <div><strong>Menerapkan (C3):</strong> Menyelesaikan studi kasus sederhana terkait ${materi} menggunakan prosedur yang benar.</div>
+                </div>
+                <div class="step-item">
+                    <div class="step-num">4</div>
+                    <div><strong>Mengevaluasi (C5):</strong> Menilai keakuratan hasil pengerjaan tugas terkait ${materi} sesuai kriteria ketelitian.</div>
+                </div>
+            `;
+
+            const waktu = jp * 40;
+
+            setTimeout(() => {
+                const html = `
+                    <div class="doc-kop">
+                        <img src="${SCHOOL_LOGO_URL}" class="kop-logo" alt="Logo" onerror="this.style.display='none'">
+                        <div class="kop-text">
+                            <h3>PEMERINTAH KOTA SAMARINDA</h3>
+                            <h2>DINAS PENDIDIKAN</h2>
+                            <h1>SMK NEGERI 14 SAMARINDA</h1>
+                            <!-- Alamat Direvisi -->
+                            <p>Jln. H.A.M.M Rifaddin Kel Tani aman Kec. Loa janan ilir Kota samarinda Kalimantan timur</p>
+                        </div>
+                    </div>
+
+                    <div class="doc-center-title">
+                        <h2>MODUL AJAR KURIKULUM MERDEKA</h2>
+                        <p>${mapel} - ${fase}</p>
+                    </div>
+
+                    <div class="doc-section">
+                        <h3>A. Informasi Umum</h3>
+                        <table class="doc-table">
+                            <tr><td>Satuan Pendidikan</td><td>: ${sekolah}</td></tr>
+                            <tr><td>Mata Pelajaran</td><td>: ${mapel}</td></tr>
+                            <tr><td>Fase / Kelas</td><td>: ${fase}</td></tr>
+                            <tr><td>Topik Materi</td><td>: <strong>${materi}</strong></td></tr>
+                            <tr><td>Alokasi Waktu</td><td>: ${jp} JP (${waktu} Menit)</td></tr>
+                        </table>
+                    </div>
+
+                    <div class="doc-section">
+                        <h3>B. Capaian Pembelajaran (CP)</h3>
+                        <div style="border: 1px dashed #999; padding: 10px; font-style: italic; color: #333; background: #fafafa;">
+                            ${cpManual.replace(/\n/g, '<br>')}
+                        </div>
+                    </div>
+
+                    <div class="doc-section">
+                        <h3>C. Tujuan Pembelajaran (AI Generated)</h3>
+                        <p><strong>Tujuan Umum:</strong></p>
+                        <p>${tujuanUtama}</p>
+                        
+                        <p style="margin-top:15px; font-weight:700;">Alur Tujuan Pembelajaran:</p>
+                        <div class="alur-tujuan-box">
+                            ${alurTujuanAI}
+                        </div>
+                    </div>
+
+                    <div class="doc-section">
+                        <h3>D. Rincian Kegiatan Pembelajaran</h3>
+                        <table class="doc-table">
+                            <tr>
+                                <td style="width: 15%;"><strong>Pendahuluan</strong><br><small>15 Menit</small></td>
+                                <td>
+                                    • Guru membuka kelas dan berdoa.<br>
+                                    • Guru mengaitkan materi <em>${materi}</em> dengan dunia industri.<br>
+                                    • Guru menyampaikan tujuan dan capaian pembelajaran.
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><strong>Kegiatan Inti</strong><br><small>60 Menit</small></td>
+                                <td>
+                                    <strong>Kegiatan 1 (Eksplorasi):</strong> Siswa membaca sumber belajar mengenai ${materi}.<br>
+                                    <strong>Kegiatan 2 (Elaborasi):</strong> Diskusi kelompok untuk menganalisis studi kasus ${materi}.<br>
+                                    <strong>Kegiatan 3 (Konfirmasi):</strong> Siswa mempresentasikan hasil analisis, Guru memberikan penguatan.
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><strong>Penutup</strong><br><small>5 Menit</small></td>
+                                <td>
+                                    • Guru dan siswa menyimpulkan materi.<br>
+                                    • Refleksi dan doa penutup.
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+
+                    <div class="doc-section">
+                        <h3>E. Asesmen</h3>
+                        <table class="doc-table">
+                            <tr><td>Jenis</td><td>Teknik</td><td>Instrumen</td></tr>
+                            <tr><td>Formatif</td><td>Observasi & Tanya Jawab</td><td>Lembar Observasi Sikap & Pertanyaan Lisan</td></tr>
+                            <tr><td>Sumatif</td><td>Tes Tertulis/Praktik</td><td>Soal Esai / Studi Kasus ${materi}</td></tr>
+                        </table>
+                    </div>
+
+                    <!-- Hanya Tanda Tangan Guru -->
+                    <div class="signature-only">
+                        <p>Samarinda, ${new Date().toLocaleDateString('id-ID', {day: 'numeric', month: 'long', year: 'numeric'})}</p>
+                        <p>Guru Mata Pelajaran,</p>
+                        <br><br><br>
+                        <p style="text-decoration: underline; font-weight: bold;">${guru}</p>
+                        <p>NIP. ${nip}</p>
+                    </div>
+                `;
+
+                content.innerHTML = html;
+                content.style.display = 'block';
+                loader.style.display = 'none';
+                btn.disabled = false;
+                btn.innerHTML = '✨ Generate Modul';
+
+            }, 1200);
+        }
+    </script>
+</body>
+</html>
